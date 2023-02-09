@@ -16,8 +16,8 @@ func main() {
 	http.Handle("/static/",
 		http.StripPrefix("/static/",
 			http.FileServer(http.Dir("assets"))))
-	http.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
-		var data = M{"name": "Batman"}
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		var data = M{"name": "Bagoes"}
 		err = tmpl.ExecuteTemplate(w, "index", data)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -25,13 +25,13 @@ func main() {
 	})
 
 	http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
-		var data = M{"name": "Batman"}
+		var data = M{"name": "Bagoes"}
 		err = tmpl.ExecuteTemplate(w, "about", data)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
 
-	fmt.Println("server started at localhost:9000")
-	http.ListenAndServe(":9000", nil)
+	fmt.Println("server started at localhost:3000")
+	http.ListenAndServe("localhost:9000", nil)
 }
