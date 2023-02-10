@@ -7,9 +7,10 @@ import (
 
 type Post struct {
 	gorm.Model
-	Title   string `gorm:"size:255;not null;unique" json:"title"`
-	Content string `gorm:"size:255;not null;" json:"content"`
-	UserID  uint
+	Title      string `gorm:"size:255;not null;unique" json:"title"`
+	Content    string `gorm:"size:255;not null;" json:"content"`
+	UserID     uint
+	Categories []Category `gorm:"many2many:post_categories;"`
 }
 
 func (post *Post) Save() (*Post, error) {

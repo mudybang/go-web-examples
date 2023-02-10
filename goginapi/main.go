@@ -22,6 +22,7 @@ func loadDatabase() {
 	database.Connect()
 	database.Database.AutoMigrate(&model.User{})
 	database.Database.AutoMigrate(&model.Post{})
+	database.Database.AutoMigrate(&model.Category{})
 }
 
 func loadEnv() {
@@ -36,6 +37,9 @@ func serveApplication() {
 	publicRoutes := router.Group("/auth")
 	publicRoutes.POST("/register", controller.Register)
 	publicRoutes.POST("/login", controller.Login)
+
+	publicRoutes.POST("/category", controller.CreateCategory)
+	publicRoutes.GET("/categories", controller.GetAllCategories)
 
 	protectedRoutes := router.Group("/api")
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
