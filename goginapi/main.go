@@ -19,7 +19,7 @@ func main() {
 }
 
 func loadDatabase() {
-	database.Connect()
+	database.ConnectPostgree()
 	database.Database.AutoMigrate(&model.User{})
 	database.Database.AutoMigrate(&model.Post{})
 	database.Database.AutoMigrate(&model.Category{})
